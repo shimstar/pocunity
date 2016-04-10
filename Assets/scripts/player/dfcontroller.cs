@@ -2,12 +2,14 @@
 using UnityEngine.UI;
 using System.Collections;
 
+
 public class dfcontroller : MonoBehaviour {
     private float torqueStep = 3;
     private float speed=0;
     private float speedMax = 30;
     private Rigidbody rb;
-    public Slider speedBar; 
+    public Slider speedBar;
+    public GameObject greenLaserPrefab;
 
     void start()
     {
@@ -74,7 +76,17 @@ public class dfcontroller : MonoBehaviour {
         float prcentSpeed = speed / speedMax;
         speedBar.value = prcentSpeed;
         
+        if (Input.GetMouseButtonDown(0))
+        {
+            shoot();
+        }
         
+    }
+
+    private void shoot()
+    {
+        GameObject bul = (GameObject)Instantiate(greenLaserPrefab, transform.position, transform.rotation);
+
     }
 
     
