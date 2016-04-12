@@ -85,8 +85,13 @@ public class dfcontroller : MonoBehaviour {
 
     private void shoot()
     {
-        GameObject bul = (GameObject)Instantiate(greenLaserPrefab, transform.position, transform.rotation);
-
+        Vector3 location = transform.position + transform.forward * -2;
+        GameObject bul = (GameObject)Instantiate(greenLaserPrefab, location, transform.rotation);
+        Rigidbody rbullet = bul.GetComponent<Rigidbody>();
+        if (rbullet)
+        {
+            rbullet.AddForce(rbullet.transform.forward * -500, ForceMode.Acceleration);
+        }
     }
 
     
