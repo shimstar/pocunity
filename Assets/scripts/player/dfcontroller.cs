@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Networking;
 
 
-public class dfcontroller : MonoBehaviour {
+public class dfcontroller : NetworkBehaviour
+{
     private float torqueStep = 3;
     private float speed=0;
     private float speedMax = 30;
     private Rigidbody rb;
     public Slider speedBar;
     public GameObject greenLaserPrefab;
+
 
     void start()
     {

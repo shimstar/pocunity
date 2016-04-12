@@ -6,12 +6,12 @@ public class networkmanager : MonoBehaviour {
 
     public bool isAtStartup = true;
     NetworkClient client;
+    public GameObject dfPrefab;
 
 
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
