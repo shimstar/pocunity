@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Networking;
 
 
@@ -12,11 +13,18 @@ public class dfcontroller : NetworkBehaviour
     private Rigidbody rb;
     public Slider speedBar;
     public GameObject greenLaserPrefab;
-
+    public Camera zoneCamera;
 
     void start()
     {
          rb = GetComponent<Rigidbody>();
+        
+        Camera cam = Camera.main;
+
+        cam.transform.parent = this.transform;
+
+        Debug.Log("test");
+
     }
 
     void Update()
@@ -74,6 +82,9 @@ public class dfcontroller : NetworkBehaviour
         else
         {
             rb = GetComponent<Rigidbody>();
+            Camera cam = Camera.main;
+
+            cam.transform.parent = this.transform;
         }
 
         float prcentSpeed = speed / speedMax;

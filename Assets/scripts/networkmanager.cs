@@ -59,10 +59,13 @@ public class networkmanager : MonoBehaviour {
     // Create a client and connect to the server port
     public void SetupClient()
     {
+
+        ClientScene.RegisterPrefab(dfPrefab);
         client = new NetworkClient();
         client.RegisterHandler(MsgType.Connect, OnConnected);
         client.Connect("127.0.0.1", 4444);
         isAtStartup = false;
+        
     }
 
     // Create a local client and connect to the local server
@@ -76,5 +79,6 @@ public class networkmanager : MonoBehaviour {
     public void OnConnected(NetworkMessage netMsg)
     {
         Debug.Log("Connected to server");
+        GameObject df = (GameObject)Instantiate(dfPrefab);
     }
 }
