@@ -29,6 +29,7 @@ public class dfcontroller : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         Camera cam = Camera.main;
         cam.transform.parent = this.transform;
+        cam.transform.position = new Vector3(0, 0, -1);
         hull = maxHull;
 
     }

@@ -8,6 +8,7 @@ public class shimNWManager : NetworkManager {
     {
         base.OnServerConnect(conn);
         GameObject df = (GameObject)Instantiate(Resources.Load("dark_fighter_631"));
+        NetworkServer.Spawn(df);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
