@@ -80,5 +80,6 @@ public class networkmanager : MonoBehaviour {
     {
         Debug.Log("Connected to server");
         GameObject df = (GameObject)Instantiate(dfPrefab);
+        df.name = "Player";
     }
 }

@@ -3,17 +3,26 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
-
+using System;
 
 public class dfcontroller : NetworkBehaviour
 {
     private float torqueStep = 3;
-    private float speed=0;
+    private float speed = 0;
     private float speedMax = 30;
     private Rigidbody rb;
-    public Slider speedBar;
     public GameObject greenLaserPrefab;
-    public Camera zoneCamera;
+    public float hull;
+    public float maxHull = 100.0f;
+
+    public float getPrcentSpeed() {
+        return speed / speedMax;
+    }
+
+    public float getPrcentHull()
+    {
+        return hull / maxHull;
+    }
 
     void start()
     {
@@ -87,9 +96,7 @@ public class dfcontroller : NetworkBehaviour
             cam.transform.parent = this.transform;
         }
 
-        float prcentSpeed = speed / speedMax;
-        speedBar.value = prcentSpeed;
-        
+       
         if (Input.GetMouseButtonDown(0))
         {
             shoot();
