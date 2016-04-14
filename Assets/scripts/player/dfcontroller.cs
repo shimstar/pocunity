@@ -8,10 +8,12 @@ using System;
 public class dfcontroller : NetworkBehaviour
 {
     private float torqueStep = 3;
+    [SyncVar]
     private float speed = 0;
     private float speedMax = 30;
     private Rigidbody rb;
     public GameObject greenLaserPrefab;
+    [SyncVar]
     public float hull;
     public float maxHull = 100.0f;
 
@@ -39,69 +41,34 @@ public class dfcontroller : NetworkBehaviour
         hull -= 10;
     }
 
-    void Update()
+    [Command]
+    void CmdApplyTorque(Vector3 torque)
     {
-        if (rb)
-        {
-            if (Input.GetKey(KeyCode.Z) == true)
-            {
-                rb.AddTorque(transform.right * torqueStep * Time.deltaTime);
-            }
-            else if (Input.GetKey(KeyCode.S) == true)
-            {
-                rb.AddTorque(transform.right * -torqueStep * Time.deltaTime);
-            }
-            else if (Input.GetKey(KeyCode.D) == true)
-            {
-                rb.AddTorque(transform.up * -torqueStep * Time.deltaTime);
-            }
-            else if (Input.GetKey(KeyCode.Q) == true)
-            {
-                rb.AddTorque(transform.up * torqueStep * Time.deltaTime);
-            }
-            else if (Input.GetKey(KeyCode.A) == true)
-            {
-
-                if ((speed + (Time.deltaTime * 10)) > speedMax)
-                {
-                    speed = speedMax;
-                }
-                else
-                {
-                    speed += Time.deltaTime * 10;
-                }
-
-
-            }
-            else if (Input.GetKey(KeyCode.W) == true)
-            {
-
-                if ((speed - (Time.deltaTime * 10)) < 0)
-                {
-                    speed = 0;
-                }
-                else
-                {
-                    speed -= Time.deltaTime * 10;
-                }
-
-
-            }
-
-            rb.AddForce(rb.transform.forward * -speed, ForceMode.Acceleration);
-
-        }
-       
-
-       
-        if (Input.GetMouseButtonDown(0))
-        {
-            shoot();
-        }
-        
+        rb.AddTorque(torque);
     }
 
-    private void shoot()
+    [Command]
+    void CmdUpdateSpeed(float speedDelta)
+    {
+        if((speed+speedDelta)> speedMax)
+        {
+            speed = speedMax;
+        }
+        else
+        {
+            if ((speed + speedDelta) < 0)
+            {
+                speed = 0;
+            }
+            else
+            {
+                speed += speedDelta;
+            }
+        }
+    }
+
+    [Command]
+    private void CmdShoot()
     {
         Vector3 location = transform.position + transform.forward * -2;
         GameObject bul = (GameObject)Instantiate(greenLaserPrefab, location, transform.rotation);
@@ -111,6 +78,49 @@ public class dfcontroller : NetworkBehaviour
             rbullet.AddForce(rbullet.transform.forward * -500, ForceMode.Acceleration);
         }
     }
+
+    void Update()
+    {
+        if (!isServer)
+        {
+            if (Input.GetKey(KeyCode.Z) == true)
+            {
+                CmdApplyTorque(transform.right * torqueStep * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.S) == true)
+            {
+                CmdApplyTorque(transform.right * -torqueStep * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.D) == true)
+            {
+                CmdApplyTorque(transform.up * -torqueStep * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.Q) == true)
+            {
+                CmdApplyTorque(transform.up * torqueStep * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.A) == true)
+            {
+                CmdUpdateSpeed(Time.deltaTime * 10);
+            }
+            else if (Input.GetKey(KeyCode.W) == true)
+            {
+                CmdUpdateSpeed(Time.deltaTime * -10);
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                CmdShoot();
+            }
+        }
+        else {
+            rb.AddForce(rb.transform.forward * -speed, ForceMode.Acceleration);
+        }
+        
+        
+    }
+
+   
 
     
 }
