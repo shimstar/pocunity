@@ -24,16 +24,21 @@ public class dfcontroller : NetworkBehaviour
         return hull / maxHull;
     }
 
-    void start()
+    void Start()
     {
          rb = GetComponent<Rigidbody>();
         
         Camera cam = Camera.main;
 
         cam.transform.parent = this.transform;
-
+        hull = maxHull;
         Debug.Log("test");
 
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        hull -= 10;
     }
 
     void Update()
