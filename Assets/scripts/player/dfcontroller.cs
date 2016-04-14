@@ -26,13 +26,10 @@ public class dfcontroller : NetworkBehaviour
 
     void Start()
     {
-         rb = GetComponent<Rigidbody>();
-        
+        rb = GetComponent<Rigidbody>();
         Camera cam = Camera.main;
-
         cam.transform.parent = this.transform;
         hull = maxHull;
-        Debug.Log("test");
 
     }
 
@@ -93,13 +90,7 @@ public class dfcontroller : NetworkBehaviour
             rb.AddForce(rb.transform.forward * -speed, ForceMode.Acceleration);
 
         }
-        else
-        {
-            rb = GetComponent<Rigidbody>();
-            Camera cam = Camera.main;
-
-            cam.transform.parent = this.transform;
-        }
+       
 
        
         if (Input.GetMouseButtonDown(0))
