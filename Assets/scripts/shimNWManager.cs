@@ -22,10 +22,8 @@ public class shimNWManager : NetworkManager {
         GameObject pref = Resources.Load("dark_fighter_631") as GameObject;
         ClientScene.RegisterPrefab(pref);
         base.OnServerAddPlayer(conn, playerControllerId);
-        Debug.Log("porpoarp");
-        //Debug.Log("ARFARF " + playerControllerId);
         GameObject df = (GameObject)Instantiate(pref);
-        //NetworkServer.AddPlayerForConnection(conn, df, playerControllerId);
+        NetworkServer.AddPlayerForConnection(conn, df, playerControllerId);
     }
 
     public override void OnClientConnect(NetworkConnection conn)

@@ -7,7 +7,7 @@ using System;
 
 public class dfcontroller : NetworkBehaviour
 {
-    private float torqueStep = 3;
+    private float torqueStep = 50;
     [SyncVar]
     private float speed = 0;
     private float speedMax = 30;
@@ -26,12 +26,19 @@ public class dfcontroller : NetworkBehaviour
         return hull / maxHull;
     }
 
-    void Start()
+
+    public override void OnStartLocalPlayer()
     {
-        rb = GetComponent<Rigidbody>();
+        base.OnStartLocalPlayer();
         Camera cam = Camera.main;
         cam.transform.parent = this.transform;
         cam.transform.position = new Vector3(0, 0, -1);
+
+    }
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>(); 
         hull = maxHull;
 
     }
@@ -42,9 +49,15 @@ public class dfcontroller : NetworkBehaviour
     }
 
     [Command]
-    void CmdApplyTorque(Vector3 torque)
+    void CmdApplyTorqueUp(float torque)
     {
-        rb.AddTorque(torque);
+        rb.AddTorque(transform.right * torque,ForceMode.Acceleration);
+    }
+
+    [Command]
+    void CmdApplyTorqueLeft(float torque)
+    {
+        rb.AddTorque(transform.up * torque, ForceMode.Acceleration);
     }
 
     [Command]
@@ -83,21 +96,22 @@ public class dfcontroller : NetworkBehaviour
     {
         if (!isServer)
         {
+            Debug.Log(speed);
             if (Input.GetKey(KeyCode.Z) == true)
             {
-                CmdApplyTorque(transform.right * torqueStep * Time.deltaTime);
+                CmdApplyTorqueUp( torqueStep * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.S) == true)
             {
-                CmdApplyTorque(transform.right * -torqueStep * Time.deltaTime);
+                CmdApplyTorqueUp(-torqueStep * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.D) == true)
             {
-                CmdApplyTorque(transform.up * -torqueStep * Time.deltaTime);
+                CmdApplyTorqueLeft( -torqueStep * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.Q) == true)
             {
-                CmdApplyTorque(transform.up * torqueStep * Time.deltaTime);
+                CmdApplyTorqueLeft( torqueStep * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.A) == true)
             {

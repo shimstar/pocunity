@@ -52,8 +52,7 @@ public class networkmanager : MonoBehaviour
     {
         NetworkServer.Listen(4444);
         isAtStartup = false;
-        //Application.LoadLevel("level1");
-        Debug.Log("pppp");
+ 
 
     }
 
@@ -81,26 +80,7 @@ public class networkmanager : MonoBehaviour
     public void OnConnected(NetworkMessage netMsg)
     {
         Debug.Log("Connected to server" + client.isConnected);
-        
-       // GameObject df = (GameObject)Instantiate(dfPrefab);
-       // df.name = "Player";
-    }
-    /*
-    public void OnPlayerConnected(NetworkPlayer pl)
-    {
-        Debug.Log("pladearfakejk ");
+
     }
 
-    public void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
-    {
-        
-        Debug.Log("New User is coming " + playerControllerId);
-    }
-
-    public void OnServerConnect(NetworkConnection conn)
-    {
-        Debug.Log("New player");
-    }
-    */
-    
 }
