@@ -8,6 +8,10 @@ public class shimNWManager : NetworkManager {
     {
         base.OnStartServer();
         playerPrefab = Resources.Load("dark_fighter_631") as GameObject;
+        GameObject pref = Resources.Load("dark_fighter_631") as GameObject;
+        ClientScene.RegisterPrefab(pref);
+        pref = Resources.Load("lasergreen") as GameObject;
+        ClientScene.RegisterPrefab(pref);
     }
 
     public override void OnServerConnect(NetworkConnection conn)
@@ -20,7 +24,6 @@ public class shimNWManager : NetworkManager {
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject pref = Resources.Load("dark_fighter_631") as GameObject;
-        ClientScene.RegisterPrefab(pref);
         base.OnServerAddPlayer(conn, playerControllerId);
         GameObject df = (GameObject)Instantiate(pref);
         NetworkServer.AddPlayerForConnection(conn, df, playerControllerId);
@@ -31,7 +34,12 @@ public class shimNWManager : NetworkManager {
         Debug.Log("qsdqsdq");
         base.OnClientConnect(conn);
         ClientScene.AddPlayer(0);
+        GameObject pref = Resources.Load("dark_fighter_631") as GameObject;
+        ClientScene.RegisterPrefab(pref);
+        pref = Resources.Load("lasergreen") as GameObject;
+        ClientScene.RegisterPrefab(pref);
     }
+
 
 
 }

@@ -81,10 +81,12 @@ public class dfcontroller : NetworkBehaviour
     }
 
     [Command]
-    private void CmdShoot()
+    private void CmdShoot(Vector3 location)
     {
-        Vector3 location = transform.position + transform.forward * -2;
+       // Vector3 location = transform.position + transform.forward * -2;
         GameObject bul = (GameObject)Instantiate(greenLaserPrefab, location, transform.rotation);
+        //GameObject bul = (GameObject)Network.Instantiate(greenLaserPrefab, location, transform.rotation,0);
+        NetworkServer.Spawn(bul);
         Rigidbody rbullet = bul.GetComponent<Rigidbody>();
         if (rbullet)
         {
@@ -124,7 +126,8 @@ public class dfcontroller : NetworkBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                CmdShoot();
+                Vector3 location = transform.position + transform.forward * -2;
+                CmdShoot(location);
             }
         }
         else {
