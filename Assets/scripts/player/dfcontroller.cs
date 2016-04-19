@@ -33,7 +33,7 @@ public class dfcontroller : NetworkBehaviour
         Camera cam = Camera.main;
         cam.transform.parent = this.transform;
         cam.transform.position = new Vector3(0, 0, -1);
-
+        this.name = "Player";
     }
 
     void Start()
@@ -81,9 +81,9 @@ public class dfcontroller : NetworkBehaviour
     }
 
     [Command]
-    private void CmdShoot(Vector3 location)
+    private void CmdShoot()
     {
-       // Vector3 location = transform.position + transform.forward * -2;
+        Vector3 location = transform.position + transform.forward * -2;
         GameObject bul = (GameObject)Instantiate(greenLaserPrefab, location, transform.rotation);
         //GameObject bul = (GameObject)Network.Instantiate(greenLaserPrefab, location, transform.rotation,0);
         NetworkServer.Spawn(bul);
@@ -126,8 +126,7 @@ public class dfcontroller : NetworkBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                Vector3 location = transform.position + transform.forward * -2;
-                CmdShoot(location);
+                CmdShoot();
             }
         }
         else {
