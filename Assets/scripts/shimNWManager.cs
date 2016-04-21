@@ -7,7 +7,7 @@ public class shimNWManager : NetworkManager {
     public override void OnStartServer()
     {
         base.OnStartServer();
-        playerPrefab = Resources.Load("ships/dark_fighter_631") as GameObject;
+        //playerPrefab = Resources.Load("ships/dark_fighter_631") as GameObject;
         GameObject pref = Resources.Load("ships/dark_fighter_631") as GameObject;
         ClientScene.RegisterPrefab(pref);
         pref = Resources.Load("ships/lasergreen") as GameObject;
