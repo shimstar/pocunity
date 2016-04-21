@@ -98,7 +98,6 @@ public class dfcontroller : NetworkBehaviour
     {
         if (!isServer)
         {
-            Debug.Log(speed);
             if (Input.GetKey(KeyCode.Z) == true)
             {
                 CmdApplyTorqueUp( torqueStep * Time.deltaTime);

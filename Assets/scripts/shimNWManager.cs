@@ -37,6 +37,8 @@ public class shimNWManager : NetworkManager {
         ClientScene.RegisterPrefab(pref);
         pref = Resources.Load("ships/lasergreen") as GameObject;
         ClientScene.RegisterPrefab(pref);
+        pref = Resources.Load("ExplosionShim") as GameObject;
+        ClientScene.RegisterPrefab(pref);
     }
 
 
