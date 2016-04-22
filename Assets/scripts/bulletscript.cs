@@ -5,9 +5,11 @@ using UnityEngine.Networking;
 public class bulletscript : NetworkBehaviour
 {
     private float timer;
+    private float damage;
     // Use this for initialization
     void Start () {
         timer = 0;
+        damage = 20;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +27,15 @@ public class bulletscript : NetworkBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (isServer) { 
+            if(collision.gameObject.tag == "ship")
+            {
+                dfcontroller dfcontrol = collision.gameObject.GetComponent<dfcontroller>();
+                if (dfcontrol != null)
+                {
+                    dfcontrol.setDamage(damage);
+                }
+            }
+
             GameObject explosion = Resources.Load("ExplosionShim") as GameObject;
             GameObject bul = (GameObject)Instantiate(explosion, transform.position, transform.rotation);
             NetworkServer.Spawn(bul);

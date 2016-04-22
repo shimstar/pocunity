@@ -17,6 +17,16 @@ public class dfcontroller : NetworkBehaviour
     public float hull;
     public float maxHull = 100.0f;
 
+    public float getHull()
+    {
+        return hull;
+    }
+
+    public void setDamage(float damage)
+    {
+        hull -= damage;
+    }
+
     public float getPrcentSpeed() {
         return speed / speedMax;
     }
