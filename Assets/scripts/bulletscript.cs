@@ -21,7 +21,6 @@ public class bulletscript : NetworkBehaviour
             GameObject explosion = Resources.Load("ExplosionShim") as GameObject;
             GameObject bul = (GameObject)Instantiate(explosion, transform.position, transform.rotation);
             NetworkServer.Spawn(bul);
-            //Rigidbody rbullet = bul.GetComponent<Rigidbody>();
             Destroy(this.gameObject);
             
         }

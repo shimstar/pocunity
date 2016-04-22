@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class speedbar : MonoBehaviour {
+public class healthbar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -11,12 +11,12 @@ public class speedbar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GameObject PlayerObject = GameObject.Find("Player");
+        GameObject PlayerObject = GameObject.Find("PlayerShip");
         if (PlayerObject) { 
             dfcontroller player = (dfcontroller)PlayerObject.GetComponent<dfcontroller>();
             if (player) { 
-                Slider speedBar = (Slider)GetComponent<Slider>();
-                speedBar.value = player.getPrcentSpeed();
+                Slider healthBar = (Slider)GetComponent<Slider>();
+                healthBar.value = player.getPrcentHull();
             }
         }
     }

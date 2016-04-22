@@ -33,7 +33,7 @@ public class dfcontroller : NetworkBehaviour
         Camera cam = Camera.main;
         cam.transform.parent = this.transform;
         cam.transform.position = new Vector3(0, 0, -1);
-        this.name = "Player";
+        this.name = "PlayerShip";
     }
 
     void Start()
