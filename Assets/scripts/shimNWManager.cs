@@ -4,6 +4,19 @@ using UnityEngine.Networking;
 
 public class shimNWManager : NetworkManager {
 
+    public void Start()
+    {
+        GameObject playerOverScene = GameObject.Find("PlayerOverScene");
+        if (playerOverScene == null)
+        {
+            this.StartServer();
+        }else
+        {
+            this.StartClient();
+        }
+    }
+
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -12,6 +25,7 @@ public class shimNWManager : NetworkManager {
         ClientScene.RegisterPrefab(pref);
         pref = Resources.Load("ships/lasergreen") as GameObject;
         ClientScene.RegisterPrefab(pref);
+        Debug.Log("onStartServer");
     }
 
     public override void OnServerConnect(NetworkConnection conn)
@@ -39,6 +53,7 @@ public class shimNWManager : NetworkManager {
         ClientScene.RegisterPrefab(pref);
         pref = Resources.Load("ExplosionShim") as GameObject;
         ClientScene.RegisterPrefab(pref);
+        Debug.Log("Client Connected");
     }
 
 

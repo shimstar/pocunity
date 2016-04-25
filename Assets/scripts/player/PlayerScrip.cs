@@ -20,4 +20,9 @@ public class PlayerScrip : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 }
