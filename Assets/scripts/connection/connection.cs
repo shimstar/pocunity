@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using System.Text;
 using System.Collections.Generic;
 using System;
@@ -16,23 +17,32 @@ public class login
 
 public class connection : MonoBehaviour {
     private NetworkClient client;
+    public InputField loginField;
+    public InputField passwordField;
+    public Button connectBtn;
+    public Button playBtn;
+    public Text failed;
+    public Text success;
+       
 
     // Use this for initialization
     void Start () {
-	
-	}
+        failed.gameObject.SetActive(false);
+        success.gameObject.SetActive(false);
+        playBtn.gameObject.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
 
-    public void onClick()
+    public void checkLogin()
     {
         //Debug.Log("connect");
         //  SceneManager.LoadScene("scenes/level1");
-
-        string jsonData = "{\"login\":\"test\",\"password\":\"test\"}";
+         
+        string jsonData = "{\"login\":\"" + loginField.text +"\",\"password\":\"" + passwordField.text + "\"}";
         Dictionary<string, string> data = new Dictionary<string, string>();
        
         data.Add("Content-Type", "application/json");
@@ -52,9 +62,26 @@ public class connection : MonoBehaviour {
         if (!string.IsNullOrEmpty(www.text))
         {
             var login = JsonUtility.FromJson<login>(www.text);
+            if (login.status == "1")
+            {
+                failed.gameObject.SetActive(false);
+                success.gameObject.SetActive(true);
+                connectBtn.gameObject.SetActive(false);
+                playBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                failed.gameObject.SetActive(true);
+
+            }
        
         }
        
+    }
+
+    public void play()
+    {
+        SceneManager.LoadScene("scenes/level1");
     }
 
 
