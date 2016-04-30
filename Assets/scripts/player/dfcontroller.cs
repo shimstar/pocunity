@@ -5,27 +5,9 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using System;
 
-public class dfcontroller : NetworkBehaviour
+public class dfcontroller : ship
 {
-    private float torqueStep = 50;
-    [SyncVar]
-    private float speed = 0;
-    private float speedMax = 30;
-    private Rigidbody rb;
     public GameObject greenLaserPrefab;
-    [SyncVar]
-    public float hull;
-    public float maxHull = 100.0f;
-
-    public float getHull()
-    {
-        return hull;
-    }
-
-    public void setDamage(float damage)
-    {
-        hull -= damage;
-    }
 
     public float getPrcentSpeed() {
         return speed / speedMax;
@@ -48,7 +30,7 @@ public class dfcontroller : NetworkBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>(); 
+        this.rb = GetComponent<Rigidbody>(); 
         hull = maxHull;
 
     }
