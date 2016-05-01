@@ -6,17 +6,23 @@ public class ghoulscript : ship {
 
 	// Use this for initialization
 	void Start () {
-        targetUI = (GameObject)Instantiate(targetUIPrefab);
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
+        
+
+	}
+
+    void OnGUI()
+    {
         GameObject playerShip = GameObject.Find("PlayerShip");
         if (playerShip != null)
         {
-            Camera cam = Camera.main;
-            targetUI.transform.position = cam.ViewportToWorldPoint(transform.position);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            GUI.DrawTexture(new Rect(screenPos.x, screenPos.y, targetUITexture.width, targetUITexture.height), targetUITexture);
         }
 
-	}
+    }
 }

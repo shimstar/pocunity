@@ -12,7 +12,7 @@ public class ship : NetworkBehaviour
     [SyncVar]
     protected float hull;
     protected float maxHull = 100.0f;
-    public GameObject targetUIPrefab;
+    public Texture2D targetUITexture;
 
     public float getHull()
     {
