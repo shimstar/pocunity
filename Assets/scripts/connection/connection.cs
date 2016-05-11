@@ -23,6 +23,7 @@ public class connection : MonoBehaviour {
     public Button playBtn;
     public Text failed;
     public Text success;
+    public GameObject playerOverScene;
        
 
     // Use this for initialization
@@ -68,6 +69,10 @@ public class connection : MonoBehaviour {
                 success.gameObject.SetActive(true);
                 connectBtn.gameObject.SetActive(false);
                 playBtn.gameObject.SetActive(true);
+                PlayerScrip plScript = playerOverScene.GetComponent<PlayerScrip>();
+                plScript.setId(int.Parse(login.id));
+                plScript.setName(loginField.text);
+
             }
             else
             {

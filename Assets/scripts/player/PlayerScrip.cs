@@ -5,6 +5,17 @@ public class PlayerScrip : MonoBehaviour {
     private string playerName;
     private GameObject ship;
     private static GameObject currentPlayer;
+    private int id;
+
+    public void setName(string name)
+    {
+        playerName = name;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
     public static GameObject getCurrentPlayer()
     {
