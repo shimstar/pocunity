@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class ship : NetworkBehaviour
 {
-    protected float torqueStep = 50;
+    protected float torqueStep = 60;
     [SyncVar]
     protected float speed = 0;
     protected float speedMax = 30;
