@@ -83,12 +83,14 @@ public class dfcontroller : ship
     private void CmdShoot()
     {
         Vector3 location = transform.position + transform.forward * -2;
-        GameObject bul = (GameObject)Instantiate(greenLaserPrefab, location, transform.rotation);
+        GameObject bul = (GameObject)Instantiate(greenLaserPrefab);
         //GameObject bul = (GameObject)Network.Instantiate(greenLaserPrefab, location, transform.rotation,0);
         NetworkServer.Spawn(bul);
         Rigidbody rbullet = bul.GetComponent<Rigidbody>();
         if (rbullet)
         {
+            rbullet.transform.position = location;
+            rbullet.transform.rotation = transform.rotation;
             rbullet.AddForce(rbullet.transform.forward * -500, ForceMode.Acceleration);
         }
     }
