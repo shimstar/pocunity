@@ -27,16 +27,26 @@ public class bulletscript : NetworkBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (isServer) {
-            Debug.Log("collision");
+            
             if(collision.gameObject.tag == "ship")
             {
-                dfcontroller dfcontrol = collision.gameObject.GetComponent<dfcontroller>();
+                /*dfcontroller dfcontrol = collision.gameObject.GetComponent<dfcontroller>();
                 if (dfcontrol != null)
                 {
                     dfcontrol.setDamage(damage);
+                }*/
+                ship shipControl = collision.gameObject.GetComponent<ship>();
+                
+                if (shipControl != null)
+                {
+                    Debug.Log("damage");
+                    shipControl.setDamage(damage);
+                }else
+                {
+                    Debug.Log("not damage");
                 }
             }
-
+            Debug.Log("pppp");
             GameObject explosion = Resources.Load("ExplosionShim") as GameObject;
             GameObject expl = (GameObject)Instantiate(explosion, transform.position, transform.rotation);
             NetworkServer.Spawn(expl);

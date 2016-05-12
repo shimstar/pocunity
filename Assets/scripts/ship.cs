@@ -22,6 +22,11 @@ public class ship : NetworkBehaviour
     public void setDamage(float damage)
     {
         hull -= damage;
+
+        if (hull <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
     // Use this for initialization
     void Start () {
