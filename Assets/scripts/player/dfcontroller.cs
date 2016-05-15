@@ -44,8 +44,15 @@ public class dfcontroller : ship
 
     void OnCollisionEnter(Collision collision)
     {
-        hull -= 10;
+        if (isServer)
+        {
+            hull -= 10;
+            speed = 0;
+        }
+        
     }
+
+
 
     [Command]
     void CmdApplyTorqueUp(float torque)
