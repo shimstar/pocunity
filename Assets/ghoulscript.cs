@@ -23,53 +23,57 @@ public class ghoulscript : ship {
 
              if(goPoint != null)
              {
-                lookAtSphere.transform.LookAt(goPoint.transform);
-                
-                
-                float diffX = transform.rotation.x - lookAtSphere.transform.rotation.x;
-                float diffY = transform.rotation.y - lookAtSphere.transform.rotation.y;
-                float diffZ = transform.rotation.z - lookAtSphere.transform.rotation.z;
-                Debug.Log(diffX +"/" + diffY + "/" +diffZ);
+                /// hummmm
+                Vector3 direction = goPoint.transform.position  - transform.position;
+                float angleDiff = Vector3.Angle(transform.up, direction);
+                Vector3 cross = Vector3.Cross(transform.up, direction);
+                rb.AddTorque(transform.up * direction.magnitude * Time.deltaTime, ForceMode.Acceleration);
 
-                if (diffX < 0)
-                {
-                    rb.AddTorque(transform.up * torque, ForceMode.Acceleration);
-                }
-                else
-                {
-                    if (diffX > 0.1)
-                    {
-                        rb.AddTorque(transform.up * -torque, ForceMode.Acceleration);
-                    }
-                }
-                /*
-               if(cross.x < -5)
-               {
-                   rb.AddTorque(transform.up * torque, ForceMode.Acceleration);
-               }else
-               {
-                   if(cross.x > 5)
-                   {
-                       rb.AddTorque(transform.up * -torque, ForceMode.Acceleration);
-                   }
-               }
+                /// using slerp
+               /* Vector3 direction = goPoint.transform.position  - transform.position;
+                direction.z = -direction.z;
+                Quaternion rotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);*/
+                //rb.AddForce(rb.transform.forward * speed * Time., ForceMode.Acceleration); 
 
-               if(cross.y < -5)
-               {
-                   rb.AddTorque(transform.right * torque, ForceMode.Acceleration);
-               }else
-               {
-                   if (cross.y > 5)
-                       rb.AddTorque(transform.right * -torque, ForceMode.Acceleration);
-               }
+                /// using moveRotation
+                /*Vector3 direction = goPoint.transform.position - transform.position;
+                Vector3 localPoint = transform.InverseTransformDirection(goPoint.transform.position);
+                float angle = Mathf.Atan2(localPoint.x, localPoint.z) * Mathf.Rad2Deg;
+                Vector3 eulerAngleVelocity = new Vector3(0, angle, 0);
 
-                // apply torque along that axis according to the magnitude of the angle.
-                //rb.AddTorque(cross * angleDiff * force,ForceMode.Impulse);
-                */
+                Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime);
+                rb.MoveRotation(rb.rotation * deltaRotation);
+
+                angle = Mathf.Atan2(localPoint.y, localPoint.x) * Mathf.Rad2Deg;
+                eulerAngleVelocity = new Vector3(0, 0, angle);
+                deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime);
+                rb.MoveRotation(rb.rotation * deltaRotation);
+
+                rb.AddForce(rb.transform.forward * speed, ForceMode.Acceleration);*/
+
+                /// using torque
+                //Vector3 localPoint = rb.transform.InverseTransformPoint(goPoint.transform.position);
+                /* Vector3 localPoint = transform.InverseTransformDirection(goPoint.transform.position - transform.position);
+                 float distance =Mathf.Sqrt(goPoint.transform.position.x - transform.position.x) * (goPoint.transform.position.x - transform.position.x) + (goPoint.transform.position.x - transform.position.x) * (goPoint.transform.position.x - transform.position.x) + (goPoint.transform.position.y - transform.position.y) * (goPoint.transform.position.z - transform.position.z);
+                 Debug.Log(localPoint + "////" + localPoint.magnitude + "////" + distance);
+                 //Debug.Log(lookAtSphere.transform.position + "///" + transform.position);
+                 float factor = 0.0f;
+
+                 factor = localPoint.x > 20 ? -1.0f : (localPoint.x < -20 ? 1.0f : (localPoint.x>2? -0.25f:(localPoint.x < -2 ? 0.25f : 0)));
+
+
+                 rb.AddTorque(rb.transform.up * torqueStep * Time.deltaTime * factor, ForceMode.Acceleration);
+
+                 factor = factor == 0 ? (localPoint.y > 20 ? 1.0f : (localPoint.y < -20 ? -1.0f : (localPoint.y > 2 ? 0.25f : (localPoint.y < -2 ? -0.25f : 0)))): 0;
+                 rb.AddTorque(rb.transform.right * torqueStep * Time.deltaTime * factor, ForceMode.Acceleration);
+
+                 if (factor==0) rb.AddForce(rb.transform.forward * speed, ForceMode.Acceleration);*/
+                //Debug.Log(a);
 
 
             }
-           // rb.AddForce(rb.transform.forward * speed, ForceMode.Acceleration);
+           //
         }
 
 
