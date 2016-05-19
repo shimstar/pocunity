@@ -46,7 +46,7 @@ public class bulletscript : NetworkBehaviour
                     Debug.Log("not damage");
                 }
             }
-            Debug.Log("pppp");
+            Debug.Log(collision.gameObject);
             GameObject explosion = Resources.Load("ExplosionShim") as GameObject;
             GameObject expl = (GameObject)Instantiate(explosion, transform.position, transform.rotation);
             NetworkServer.Spawn(expl);
