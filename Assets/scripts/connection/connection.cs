@@ -59,29 +59,33 @@ public class connection : MonoBehaviour {
         //Wait for request to complete
         yield return null;
         yield return www;
-    
-        if (!string.IsNullOrEmpty(www.text))
-        {
-            var login = JsonUtility.FromJson<login>(www.text);
-            if (login.status == "1")
-            {
-                failed.gameObject.SetActive(false);
-                success.gameObject.SetActive(true);
-                connectBtn.gameObject.SetActive(false);
-                playBtn.gameObject.SetActive(true);
-                PlayerScrip plScript = playerOverScene.GetComponent<PlayerScrip>();
-                plScript.setId(int.Parse(login.id));
-                plScript.setName(loginField.text);
 
-            }
-            else
-            {
-                failed.gameObject.SetActive(true);
+        /* if (!string.IsNullOrEmpty(www.text))
+         {
+             var login = JsonUtility.FromJson<login>(www.text);
+             if (login.status == "1")
+             {
+                 failed.gameObject.SetActive(false);
+                 success.gameObject.SetActive(true);
+                 connectBtn.gameObject.SetActive(false);
+                 playBtn.gameObject.SetActive(true);
+                 PlayerScrip plScript = playerOverScene.GetComponent<PlayerScrip>();
+                 plScript.setId(int.Parse(login.id));
+                 plScript.setName(loginField.text);
 
-            }
-       
-        }
-       
+             }
+             else
+             {
+                 failed.gameObject.SetActive(true);
+
+             }
+
+         }*/
+        failed.gameObject.SetActive(false);
+        success.gameObject.SetActive(true);
+        connectBtn.gameObject.SetActive(false);
+        playBtn.gameObject.SetActive(true);
+
     }
 
     public void play()

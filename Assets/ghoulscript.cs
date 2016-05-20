@@ -99,7 +99,7 @@ public class ghoulscript : ship {
                 //speed = distance > 1000 ? 70 : (distance > 500 ? 50 : (distance > 200 ? 30 : 0));
                 if (checkPositionTofire(target.transform.position) == true)
                 {
-                    fire();
+                   // fire();
                 }
             }
         }

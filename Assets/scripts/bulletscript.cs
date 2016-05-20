@@ -14,7 +14,7 @@ public class bulletscript : NetworkBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-        if (timer > 20)
+        if (timer > 10)
         {
             Destroy(this.gameObject);
         }
