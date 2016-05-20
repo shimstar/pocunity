@@ -8,6 +8,7 @@ public class ship : NetworkBehaviour
     [SyncVar]
     protected float speed = 0;
     protected float speedMax = 30;
+    protected bool shipFromLocalPlayer = false;
     protected Rigidbody rb;
     [SyncVar]
     protected float hull;
@@ -37,4 +38,20 @@ public class ship : NetworkBehaviour
 	void Update () {
 	    
 	}
+
+    void onDestroy()
+    {
+        if (shipFromLocalPlayer == true)
+        {
+            GameObject playerOverScene = GameObject.Find("PlayerOverScene");
+            if (playerOverScene != null)
+            {
+                PlayerScrip ps = playerOverScene.GetComponent<PlayerScrip>();
+                if (ps != null)
+                {
+                    ps.manageDeath();
+                }
+            }
+        }
+    }
 }

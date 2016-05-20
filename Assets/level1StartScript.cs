@@ -28,11 +28,16 @@ public class level1StartScript : NetworkBehaviour
 
 	// Use this for initialization
 	void Start () {
-        GameObject pref = Resources.Load("ships/GhoulOBJ") as GameObject;
-        GameObject ennemy = (GameObject)Instantiate(pref);
-        ennemy.transform.position.Set(600, 600, 600);
-
-        //generateLevel();
+            GameObject pref = Resources.Load("ships/GhoulOBJ") as GameObject;
+            GameObject ennemy = (GameObject)Instantiate(pref);
+            ennemy.transform.position.Set(600, 600, 600);
+            generateLevel();
+            GameObject uiDeath = GameObject.Find("/Canvas/deathpanel");
+        
+            if (uiDeath != null)
+            {
+                uiDeath.SetActive(false);
+            }
 
 
     }

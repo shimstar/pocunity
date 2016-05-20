@@ -9,6 +9,7 @@ public class dfcontroller : ship
 {
     public GameObject greenLaserPrefab;
     public Texture2D crosshairImage;
+    
 
     public float getPrcentSpeed() {
         return speed / speedMax;
@@ -33,6 +34,7 @@ public class dfcontroller : ship
         cam.transform.parent = this.transform;
         cam.transform.position = new Vector3(0, 0, -1);
         this.name = "PlayerShip";
+        shipFromLocalPlayer = true;
     }
 
     void Start()
