@@ -28,7 +28,7 @@ public class level1StartScript : NetworkBehaviour
 
 	// Use this for initialization
 	void Start () {
-            GameObject pref = Resources.Load("ships/GhoulOBJ") as GameObject;
+            GameObject pref = Resources.Load("ships/ghoul3") as GameObject;
             GameObject ennemy = (GameObject)Instantiate(pref);
             ennemy.transform.position.Set(600, 600, 600);
             generateLevel();
