@@ -50,6 +50,7 @@ public class dfcontroller : ship
         {
             hull -= 10;
             speed = 0;
+            Debug.Log(collision.collider);
         }
         
     }
