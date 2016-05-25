@@ -9,14 +9,24 @@ public class shimNWManager : NetworkManager {
         GameObject playerOverScene = GameObject.Find("PlayerOverScene");
         if (playerOverScene == null)
         {
-            this.StartServer();
+            bool result =this.StartServer();
+            Debug.Log("start server = " + result);
+            /*if (result == true)
+            {
+                level1StartScript lsc = this.GetComponent<level1StartScript>();
+
+                if (lsc != null)
+                {
+                    lsc.generateLevel();
+                }
+            }*/
         }else
         {
             this.StartClient();
         }
     }
 
-
+    
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -27,6 +37,7 @@ public class shimNWManager : NetworkManager {
         pref = Resources.Load("ships/lasergreen") as GameObject;
         ClientScene.RegisterPrefab(pref);
         Debug.Log("onStartServer");
+        
     }
 
     public override void OnServerConnect(NetworkConnection conn)

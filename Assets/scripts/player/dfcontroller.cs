@@ -42,6 +42,7 @@ public class dfcontroller : ship
         this.rb = GetComponent<Rigidbody>(); 
         hull = maxHull;
 
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -133,8 +134,12 @@ public class dfcontroller : ship
             {
                 CmdUpdateSpeed(Time.deltaTime * -10);
             }
+            else if (Input.GetKey(KeyCode.Escape) == true)
+            {
+                Application.Quit();
+            }
 
-            if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
             {
                 CmdShoot();
             }
