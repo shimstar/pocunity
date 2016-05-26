@@ -9,7 +9,7 @@ public class level1StartScript : NetworkBehaviour
     {
         GameObject asteroidPref = Resources.Load("zone/asteroid1") as GameObject;
         int cpt = 0;
-        int nbAmas = Random.Range(20, 50);
+        int nbAmas = Random.Range(500, 500);
         for (int itAmas = 0; itAmas < nbAmas; itAmas++)
         {
             GameObject ast = (GameObject)Instantiate(asteroidPref);
@@ -18,7 +18,7 @@ public class level1StartScript : NetworkBehaviour
             ast.transform.Rotate( Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
             ast.name = "Asteroid" + itAmas;
             NetworkServer.Spawn(ast);
-            int nbAst = Random.Range(60, 100);
+            int nbAst = Random.Range(1, 1);
             cpt += 1;
             for (int itNbAst=0; itNbAst < nbAst; itNbAst++)
             {
@@ -35,12 +35,20 @@ public class level1StartScript : NetworkBehaviour
         Debug.Log("nb asteroid " + cpt);
     }
 
+
+    public void initLevel()
+    {
+        GameObject pref = Resources.Load("ships/ghoul3") as GameObject;
+        GameObject ennemy = (GameObject)Instantiate(pref);
+        ennemy.transform.position.Set(600, 600, 600);
+        ennemy.name = "test ennemy";
+        NetworkServer.Spawn(ennemy);
+    }
+
 	// Use this for initialization
 	void Start () {
-            GameObject pref = Resources.Load("ships/ghoul3") as GameObject;
-            GameObject ennemy = (GameObject)Instantiate(pref);
-            ennemy.transform.position.Set(600, 600, 600);
-            //generateLevel();
+           
+           // generateLevel();
             GameObject uiDeath = GameObject.Find("/Canvas/deathpanel");
         
             if (uiDeath != null)

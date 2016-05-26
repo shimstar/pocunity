@@ -22,9 +22,48 @@ public class dfcontroller : ship
 
     void OnGUI()
     {
-        float xMin = (Screen.width / 2) - (crosshairImage.width / 2);
-        float yMin = (Screen.height / 2) - (crosshairImage.height / 2);
-        GUI.DrawTexture(new Rect(xMin, yMin, crosshairImage.width, crosshairImage.height), crosshairImage);
+        if (isClient == true)
+        {
+            float xMin = (Screen.width / 2) - (crosshairImage.width / 2);
+            float yMin = (Screen.height / 2) - (crosshairImage.height / 2);
+            GUI.DrawTexture(new Rect(xMin, yMin, crosshairImage.width, crosshairImage.height), crosshairImage);
+
+            GameObject[] listOfShips = GameObject.FindGameObjectsWithTag("ship");
+            GameObject canvas = GameObject.Find("Canvas");
+
+            for (int itShip = 0; itShip < listOfShips.Length; itShip++)
+            {
+                if (listOfShips[itShip] != this) { 
+                    ship shipScript = listOfShips[itShip].GetComponent<ship>();
+                    if (shipScript != null)
+                    {
+                        if (shipScript.floatingNameText == null)
+                        {
+                            GameObject floatingText = Resources.Load("ui/followingNameUIText") as GameObject;
+                            shipScript.floatingNameText = (GameObject)Instantiate(floatingText);
+                            shipScript.floatingNameText.transform.SetParent(canvas.transform);
+                            shipScript.floatingNameText.GetComponent<Text>().text = shipScript.name;
+                        }
+                        else
+                        {
+                            Camera camera = GetComponent<Camera>();
+
+                            Vector3 screenPos = Camera.main.WorldToScreenPoint(listOfShips[itShip].transform.position);
+                            if (screenPos.z > 0 && screenPos.y > 0 && screenPos.x > 0)
+                            {
+                                screenPos.x += listOfShips[itShip].name.Length;
+                                shipScript.floatingNameText.SetActive(true);
+                                shipScript.floatingNameText.transform.position = screenPos;
+                            }
+                            else
+                            {
+                                shipScript.floatingNameText.SetActive(false);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public override void OnStartLocalPlayer()
@@ -41,6 +80,7 @@ public class dfcontroller : ship
     {
         this.rb = GetComponent<Rigidbody>(); 
         hull = maxHull;
+        this.name = "playerSip";
 
 
     }

@@ -4,6 +4,9 @@ using UnityEngine.Networking;
 
 public class ship : NetworkBehaviour
 {
+    [SyncVar]
+    public string name;
+    public GameObject floatingNameText = null;
     protected float torqueStep = 80;
     [SyncVar]
     protected float speed = 0;

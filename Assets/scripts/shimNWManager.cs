@@ -11,15 +11,15 @@ public class shimNWManager : NetworkManager {
         {
             bool result =this.StartServer();
             Debug.Log("start server = " + result);
-            /*if (result == true)
+            if (result == true)
             {
                 level1StartScript lsc = this.GetComponent<level1StartScript>();
 
                 if (lsc != null)
                 {
-                    lsc.generateLevel();
+                    lsc.initLevel();
                 }
-            }*/
+            }
         }else
         {
             this.StartClient();
@@ -62,6 +62,8 @@ public class shimNWManager : NetworkManager {
         GameObject pref = Resources.Load("ships/dark_fighter_631") as GameObject;
         ClientScene.RegisterPrefab(pref);
         pref = Resources.Load("ships/lasergreen") as GameObject;
+        ClientScene.RegisterPrefab(pref);
+        pref = Resources.Load("ships/ghoul3") as GameObject;
         ClientScene.RegisterPrefab(pref);
         pref = Resources.Load("ships/redbullet") as GameObject;
         ClientScene.RegisterPrefab(pref);
