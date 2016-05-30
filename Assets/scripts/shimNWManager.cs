@@ -17,7 +17,7 @@ public class shimNWManager : NetworkManager {
 
                 if (lsc != null)
                 {
-                   // lsc.generateLevel();
+                    //lsc.generateLevel();
                     lsc.initLevel();
                 }
             }

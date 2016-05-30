@@ -23,7 +23,7 @@ public class level1StartScript : NetworkBehaviour
             Vector3 scale = listOfAsteroid[itAst].transform.localScale;
             jsonAst += "{\"posx\" : " + pos.x + ",\"posy\" : " + pos.y + ",\"posz\":" + pos.z;
             jsonAst += ",\"quatw\":" + quat.w + ",\"quatx\":" + quat.x + ",\"quaty\":" + quat.y + ",\"quatz\":" + quat.z;
-            jsonAst += "{\"scalex\" : " + scale.x + ",\"scaley\" : " + scale.y + ",\"scalez\":" + scale.z;
+            jsonAst += ",\"scalex\" : " + scale.x + ",\"scaley\" : " + scale.y + ",\"scalez\":" + scale.z;
             jsonAst += "}";
 
             jsonAsts += jsonAst;
@@ -38,7 +38,7 @@ public class level1StartScript : NetworkBehaviour
     {
         GameObject asteroidPref = Resources.Load("zone/asteroid1") as GameObject;
         int cpt = 0;
-        int nbAmas = Random.Range(500, 500);
+        int nbAmas = Random.Range(50, 100);
         for (int itAmas = 0; itAmas < nbAmas; itAmas++)
         {
             GameObject ast = (GameObject)Instantiate(asteroidPref);
@@ -47,7 +47,7 @@ public class level1StartScript : NetworkBehaviour
             ast.transform.Rotate( Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
             ast.name = "Asteroid" + itAmas;
             NetworkServer.Spawn(ast);
-            int nbAst = Random.Range(1, 1);
+            int nbAst = Random.Range(50, 100);
             cpt += 1;
             for (int itNbAst=0; itNbAst < nbAst; itNbAst++)
             {
@@ -55,13 +55,14 @@ public class level1StartScript : NetworkBehaviour
                 ast2.transform.position = new Vector3(ast.transform.position.x + Random.Range(-1000, 1000), ast.transform.position.y + Random.Range(-1000, 1000), ast.transform.position.z + Random.Range(-1000, 1000));
                 ast2.transform.Rotate(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
                 ast2.name = "Asteroid" + itAmas + "_" + itNbAst;
-                int scale = Random.Range(1, 4);
+                int scale = Random.Range(3, 6);
                 ast2.transform.localScale = new Vector3(scale, scale, scale);
                 NetworkServer.Spawn(ast2);
                 cpt += 1;
             }
         }
         Debug.Log("nb asteroid " + cpt);
+        generateJson();
     }
 
 
