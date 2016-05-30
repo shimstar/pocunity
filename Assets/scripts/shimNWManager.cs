@@ -17,6 +17,7 @@ public class shimNWManager : NetworkManager {
 
                 if (lsc != null)
                 {
+                   // lsc.generateLevel();
                     lsc.initLevel();
                 }
             }
@@ -73,6 +74,12 @@ public class shimNWManager : NetworkManager {
         pref = Resources.Load("ExplosionShim") as GameObject;
         ClientScene.RegisterPrefab(pref);
         Debug.Log("Client Connected");
+        level1StartScript lsc = this.GetComponent<level1StartScript>();
+
+        if (lsc != null)
+        {
+            lsc.loadLevel();
+        }
     }
 
 
