@@ -42,7 +42,7 @@ public class level1StartScript : NetworkBehaviour
         for (int itAmas = 0; itAmas < nbAmas; itAmas++)
         {
             GameObject ast = (GameObject)Instantiate(asteroidPref);
-            ast.transform.position=new Vector3(Random.Range(-5000, 5000), Random.Range(-5000, 5000), Random.Range(-5000, 5000));
+            ast.transform.position=new Vector3(Random.Range(-2000, 2000), Random.Range(-2000, 2000), Random.Range(-2000, 2000));
             
             ast.transform.Rotate( Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
             ast.name = "Asteroid" + itAmas;
@@ -52,10 +52,10 @@ public class level1StartScript : NetworkBehaviour
             for (int itNbAst=0; itNbAst < nbAst; itNbAst++)
             {
                 GameObject ast2 = (GameObject)Instantiate(asteroidPref);
-                ast2.transform.position = new Vector3(ast.transform.position.x + Random.Range(-1000, 1000), ast.transform.position.y + Random.Range(-1000, 1000), ast.transform.position.z + Random.Range(-1000, 1000));
+                ast2.transform.position = new Vector3(ast.transform.position.x + Random.Range(-500, 500), ast.transform.position.y + Random.Range(-500, 500), ast.transform.position.z + Random.Range(-500, 500));
                 ast2.transform.Rotate(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
                 ast2.name = "Asteroid" + itAmas + "_" + itNbAst;
-                int scale = Random.Range(3, 6);
+                int scale = Random.Range(6, 20);
                 ast2.transform.localScale = new Vector3(scale, scale, scale);
                 NetworkServer.Spawn(ast2);
                 cpt += 1;
@@ -95,7 +95,7 @@ public class level1StartScript : NetworkBehaviour
 	// Use this for initialization
 	void Start () {
            
-           // generateLevel();
+            //generateLevel();
             GameObject uiDeath = GameObject.Find("/Canvas/deathpanel");
         
             if (uiDeath != null)
