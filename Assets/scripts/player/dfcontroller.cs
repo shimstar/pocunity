@@ -11,14 +11,7 @@ public class dfcontroller : ship
     public Texture2D crosshairImage;
     
 
-    public float getPrcentSpeed() {
-        return speed / speedMax;
-    }
-
-    public float getPrcentHull()
-    {
-        return hull / maxHull;
-    }
+    
 
     void OnGUI()
     {
