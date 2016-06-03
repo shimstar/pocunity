@@ -23,6 +23,16 @@ public class ship : NetworkBehaviour
         return hull;
     }
 
+    public float getPrcentSpeed()
+    {
+        return speed / speedMax;
+    }
+
+    public float getPrcentHull()
+    {
+        return hull / maxHull;
+    }
+
     public void setDamage(float damage)
     {
         hull -= damage;

@@ -11,12 +11,21 @@ public class speedbar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GameObject PlayerObject = GameObject.Find("PlayerShip");
-        if (PlayerObject) { 
-            dfcontroller player = (dfcontroller)PlayerObject.GetComponent<dfcontroller>();
-            if (player) { 
-                Slider speedBar = (Slider)GetComponent<Slider>();
-                speedBar.value = player.getPrcentSpeed();
+        GameObject PlayerObject = GameObject.Find("PlayerOverScene");
+        PlayerScrip ps = PlayerObject.GetComponent<PlayerScrip>();
+        if (ps)
+        {
+            GameObject plShip = ps.getShip();
+            if (plShip)
+            {
+                ship shipScript = plShip.GetComponent<ship>();
+                if (shipScript)
+                {
+                    Slider speedBar = (Slider)GetComponent<Slider>();
+                    speedBar.value = shipScript.getPrcentSpeed();
+                }
+
+
             }
         }
     }

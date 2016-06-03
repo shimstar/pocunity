@@ -11,13 +11,23 @@ public class healthbar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GameObject PlayerObject = GameObject.Find("PlayerShip");
-        if (PlayerObject) { 
-            dfcontroller player = (dfcontroller)PlayerObject.GetComponent<dfcontroller>();
-            if (player) { 
-                Slider healthBar = (Slider)GetComponent<Slider>();
-                healthBar.value = player.getPrcentHull();
+        GameObject PlayerObject = GameObject.Find("PlayerOverScene");
+        PlayerScrip ps = PlayerObject.GetComponent<PlayerScrip>();
+        if (ps)
+        {
+            GameObject plShip = ps.getShip();
+            if (plShip)
+            {
+                ship shipScript = plShip.GetComponent<ship>();
+               if (shipScript)
+                {
+                    Slider healthBar = (Slider)GetComponent<Slider>();
+                    healthBar.value = shipScript.getPrcentHull();
+                }
+                
+                
             }
         }
+        
     }
 }

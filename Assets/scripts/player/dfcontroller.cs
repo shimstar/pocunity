@@ -74,13 +74,19 @@ public class dfcontroller : ship
         cam.transform.position = new Vector3(0, 0, -1);
         this.name = "PlayerShip";
         shipFromLocalPlayer = true;
+        GameObject playerOverScene = GameObject.Find("PlayerOverScene");
+        PlayerScrip ps = playerOverScene.GetComponent<PlayerScrip>();
+        if (ps)
+        {
+            ps.setShip(this.gameObject);
+        }
     }
 
     void Start()
     {
         this.rb = GetComponent<Rigidbody>(); 
         hull = maxHull;
-        this.name = "playerSip";
+        this.name = "playerShip";
 
 
     }
