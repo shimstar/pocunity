@@ -11,6 +11,7 @@ public class ship : NetworkBehaviour
     [SyncVar]
     protected float speed = 0;
     protected float speedMax = 30;
+    protected float stepAcceleration = 25;
     protected bool shipFromLocalPlayer = false;
     protected Rigidbody rb;
     [SyncVar]

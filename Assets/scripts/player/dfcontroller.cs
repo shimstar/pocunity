@@ -80,6 +80,7 @@ public class dfcontroller : ship
         this.rb = GetComponent<Rigidbody>(); 
         hull = maxHull;
         this.name = "playerShip";
+        speedMax = 200;
 
 
     }
@@ -167,11 +168,11 @@ public class dfcontroller : ship
             }
             else if (Input.GetKey(KeyCode.A) == true)
             {
-                CmdUpdateSpeed(Time.deltaTime * 10);
+                CmdUpdateSpeed(Time.deltaTime * stepAcceleration);
             }
             else if (Input.GetKey(KeyCode.W) == true)
             {
-                CmdUpdateSpeed(Time.deltaTime * -10);
+                CmdUpdateSpeed(Time.deltaTime * -stepAcceleration);
             }
             else if (Input.GetKey(KeyCode.Escape) == true)
             {
