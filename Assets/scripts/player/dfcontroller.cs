@@ -142,7 +142,7 @@ public class dfcontroller : ship
         {
             rbullet.transform.position = location;
             rbullet.transform.rotation = transform.rotation;
-            rbullet.AddForce(rbullet.transform.forward * -500, ForceMode.Acceleration);
+            rbullet.AddForce(rbullet.transform.forward * -1500, ForceMode.Acceleration);
         }
     }
 
