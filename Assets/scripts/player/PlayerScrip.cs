@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerScrip : MonoBehaviour {
     private string playerName;
-    private GameObject ship;
+    public GameObject ship;
     private static GameObject currentPlayer;
     private int id;
 

@@ -16,7 +16,8 @@ public class healthbar : MonoBehaviour {
         if (ps)
         {
             GameObject plShip = ps.getShip();
-            if (plShip)
+            Debug.Log("lll " + plShip);
+            if (plShip != null)
             {
                 ship shipScript = plShip.GetComponent<ship>();
                if (shipScript)
@@ -24,8 +25,8 @@ public class healthbar : MonoBehaviour {
                     Slider healthBar = (Slider)GetComponent<Slider>();
                     healthBar.value = shipScript.getPrcentHull();
                 }
-                
-                
+
+
             }
         }
         

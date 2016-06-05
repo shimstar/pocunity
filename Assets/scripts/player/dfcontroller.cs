@@ -60,12 +60,23 @@ public class dfcontroller : ship
     public override void OnNetworkDestroy()
     {
         base.OnNetworkDestroy();
-        Debug.Log("Calling On DestroyNetwork");
+
         Camera cam = Camera.main;
         if (cam.transform.parent == this.transform)
         {
             cam.transform.parent = null;
+            GameObject speedBar = GameObject.Find("speedbar");
+            if (speedBar)
+            {
+                speedBar.SetActive(false);
+            }
+            GameObject healthBar = GameObject.Find("Healthbar");
+            if (healthBar)
+            {
+                healthBar.SetActive(false);
+            }
         }
+
     }
 
     public override void OnStartLocalPlayer()
