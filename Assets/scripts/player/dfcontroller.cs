@@ -131,9 +131,9 @@ public class dfcontroller : ship
     }
 
     [Command]
-    private void CmdShoot()
+    private void CmdShoot(Vector3 playerPosition, Vector3 playerForward,Quaternion playerRotation)
     {
-        Vector3 location = transform.position + transform.forward * -2;
+        Vector3 location = playerPosition + playerForward * -2;
         GameObject bul = (GameObject)Instantiate(greenLaserPrefab);
         //GameObject bul = (GameObject)Network.Instantiate(greenLaserPrefab, location, transform.rotation,0);
         NetworkServer.Spawn(bul);
@@ -141,7 +141,7 @@ public class dfcontroller : ship
         if (rbullet)
         {
             rbullet.transform.position = location;
-            rbullet.transform.rotation = transform.rotation;
+            rbullet.transform.rotation = playerRotation;
             rbullet.AddForce(rbullet.transform.forward * -1500, ForceMode.Acceleration);
         }
     }
@@ -181,7 +181,7 @@ public class dfcontroller : ship
 
                 if (Input.GetMouseButtonDown(0))
             {
-                CmdShoot();
+                CmdShoot(rb.transform.position, rb.transform.forward, rb.transform.rotation);
             }
         }
         else {
