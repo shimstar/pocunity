@@ -11,8 +11,6 @@ public class dfcontroller : ship
     public Texture2D crosshairImage;
     
 
-    
-
     void OnGUI()
     {
         if (isClient == true)
@@ -59,10 +57,22 @@ public class dfcontroller : ship
         }
     }
 
+    public override void OnNetworkDestroy()
+    {
+        base.OnNetworkDestroy();
+        Debug.Log("Calling On DestroyNetwork");
+        Camera cam = Camera.main;
+        if (cam.transform.parent == this.transform)
+        {
+            cam.transform.parent = null;
+        }
+    }
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         Camera cam = Camera.main;
+        Debug.Log(cam.transform.parent);
         cam.transform.parent = this.transform;
         cam.transform.position = new Vector3(0, 0, -1);
         this.name = "PlayerShip";
