@@ -70,10 +70,15 @@ public class dfcontroller : ship
             {
                 speedBar.SetActive(false);
             }
-            GameObject healthBar = GameObject.Find("Healthbar");
+            GameObject healthBar = GameObject.Find("HealthBar");
             if (healthBar)
             {
                 healthBar.SetActive(false);
+            }
+            GameObject deathPanelGO = GameObject.Find("Canvas").transform.Find("deathpanel").gameObject;
+            if (deathPanelGO)
+            {
+                deathPanelGO.SetActive(true);
             }
         }
 
@@ -82,10 +87,9 @@ public class dfcontroller : ship
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-        Camera cam = Camera.main;
-        Debug.Log(cam.transform.parent);
-        cam.transform.parent = this.transform;
-        cam.transform.position = new Vector3(0, 0, -1);
+        Camera camToPlayer = Camera.main;
+        camToPlayer.transform.parent = this.transform;
+        camToPlayer.transform.position = new Vector3(0, 0, -1);
         this.name = "PlayerShip";
         shipFromLocalPlayer = true;
         GameObject playerOverScene = GameObject.Find("PlayerOverScene");
@@ -94,6 +98,10 @@ public class dfcontroller : ship
         {
             ps.setShip(this.gameObject);
         }
+
+        GameObject deathPanelGO = GameObject.Find("Canvas").transform.Find("deathpanel").gameObject; ;
+        
+        deathPanelGO.SetActive(false);
     }
 
     void Start()

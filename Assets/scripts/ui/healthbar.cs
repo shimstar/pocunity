@@ -16,7 +16,6 @@ public class healthbar : MonoBehaviour {
         if (ps)
         {
             GameObject plShip = ps.getShip();
-            Debug.Log("lll " + plShip);
             if (plShip != null)
             {
                 ship shipScript = plShip.GetComponent<ship>();
