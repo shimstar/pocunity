@@ -15,10 +15,10 @@ public class dfcontroller : ship
     {
         if (isClient == true)
         {
-            float xMin = (Screen.width / 2) - (crosshairImage.width / 2);
+          /*  float xMin = (Screen.width / 2) - (crosshairImage.width / 2);
             float yMin = (Screen.height / 2) - (crosshairImage.height / 2);
             GUI.DrawTexture(new Rect(xMin, yMin, crosshairImage.width, crosshairImage.height), crosshairImage);
-
+            */
             GameObject[] listOfShips = GameObject.FindGameObjectsWithTag("ship");
             GameObject canvas = GameObject.Find("Canvas");
 
@@ -42,7 +42,7 @@ public class dfcontroller : ship
                             Vector3 screenPos = Camera.main.WorldToScreenPoint(listOfShips[itShip].transform.position);
                             if (screenPos.z > 0 && screenPos.y > 0 && screenPos.x > 0)
                             {
-                                screenPos.x += listOfShips[itShip].name.Length;
+                                screenPos.x -= listOfShips[itShip].name.Length;
                                 shipScript.floatingNameText.SetActive(true);
                                 shipScript.floatingNameText.transform.position = screenPos;
                             }
