@@ -65,23 +65,33 @@ public class dfcontroller : ship
         if (cam.transform.parent == this.transform)
         {
             cam.transform.parent = null;
-            GameObject speedBar = GameObject.Find("speedbar");
-            if (speedBar)
-            {
-                speedBar.SetActive(false);
-            }
-            GameObject healthBar = GameObject.Find("HealthBar");
-            if (healthBar)
-            {
-                healthBar.SetActive(false);
-            }
-            GameObject deathPanelGO = GameObject.Find("Canvas").transform.Find("deathpanel").gameObject;
-            if (deathPanelGO)
-            {
-                deathPanelGO.SetActive(true);
-            }
+            
         }
+        showUiGame(false);
+    }
 
+    private void showUiGame(Boolean show)
+    {
+        GameObject speedBar = GameObject.Find("Canvas").transform.Find("speedbar").gameObject;
+        if (speedBar)
+        {
+            speedBar.SetActive(show);
+        }
+        GameObject healthBar = GameObject.Find("Canvas").transform.Find("HealthBar").gameObject;
+        if (healthBar)
+        {
+            healthBar.SetActive(show);
+        }
+        GameObject deathPanelGO = GameObject.Find("Canvas").transform.Find("deathpanel").gameObject;
+        if (deathPanelGO)
+        {
+            deathPanelGO.SetActive(!show);
+        }
+        GameObject reticule = GameObject.Find("Canvas").transform.Find("reticule").gameObject;
+        if (reticule)
+        {
+            reticule.SetActive(show);
+        }
     }
 
     public override void OnStartLocalPlayer()
@@ -98,10 +108,8 @@ public class dfcontroller : ship
         {
             ps.setShip(this.gameObject);
         }
+        showUiGame(true);
 
-        GameObject deathPanelGO = GameObject.Find("Canvas").transform.Find("deathpanel").gameObject; ;
-        
-        deathPanelGO.SetActive(false);
     }
 
     void Start()

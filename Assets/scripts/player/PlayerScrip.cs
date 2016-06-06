@@ -7,6 +7,7 @@ public class PlayerScrip : MonoBehaviour {
     private static GameObject currentPlayer;
     private int id;
 
+
     public void setShip(GameObject ship)
     {
         this.ship = ship;
