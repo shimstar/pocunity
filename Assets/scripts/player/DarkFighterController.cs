@@ -60,14 +60,21 @@ public class DarkFighterController : ShipScript
     public override void OnNetworkDestroy()
     {
         base.OnNetworkDestroy();
-
-        Camera cam = Camera.main;
-        if (cam.transform.parent == this.transform)
-        {
-            cam.transform.parent = null;
+        if (isClient) { 
+            Camera cam = Camera.main;
+            if (cam.transform.parent == this.transform)
+            {
+                cam.transform.parent = null;
             
+            }
+            showUiGame(false);
+            ClientScene.RemovePlayer(0);
+           
         }
-        showUiGame(false);
+        else
+        {
+            //ClientScene.AddPlayer(0);
+        }
     }
 
     private void showUiGame(Boolean show)
@@ -223,6 +230,7 @@ public class DarkFighterController : ShipScript
         }
         else {
             rb.AddForce(rb.transform.forward * -speed, ForceMode.Acceleration);
+            this.setDamage(1);
         }
         
         

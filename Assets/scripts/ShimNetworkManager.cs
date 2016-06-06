@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class ShimNWManager : NetworkManager {
+public class ShimNetworkManager : NetworkManager {
 
     public void Start()
     {
@@ -27,6 +27,10 @@ public class ShimNWManager : NetworkManager {
         }
     }
 
+    public void respawn()
+    {
+        ClientScene.AddPlayer(0);
+    }
     
     public override void OnStartServer()
     {
@@ -45,15 +49,13 @@ public class ShimNWManager : NetworkManager {
     {
         base.OnServerConnect(conn);
 
-        // NetworkServer.Spawn(df);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject pref = Resources.Load("ships/dark_fighter_631") as GameObject;
         base.OnServerAddPlayer(conn, playerControllerId);
-        //GameObject df = (GameObject)Instantiate(pref);
-        //NetworkServer.AddPlayerForConnection(conn, df, playerControllerId);
+
     }
 
     public override void OnClientConnect(NetworkConnection conn)
