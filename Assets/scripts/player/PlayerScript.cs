@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerScrip : MonoBehaviour {
+public class PlayerScript : MonoBehaviour {
     private string playerName;
     public GameObject ship;
     private static GameObject currentPlayer;
@@ -39,12 +39,12 @@ public class PlayerScrip : MonoBehaviour {
 
     public static GameObject getCurrentPlayer()
     {
-        return PlayerScrip.currentPlayer;
+        return PlayerScript.currentPlayer;
     }
 
 	// Use this for initialization
 	void Start () {
-        PlayerScrip.currentPlayer = this.gameObject;
+        PlayerScript.currentPlayer = this.gameObject;
         
 
     }

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class speedbar : MonoBehaviour {
+public class SpeedBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,13 +12,13 @@ public class speedbar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         GameObject PlayerObject = GameObject.Find("PlayerOverScene");
-        PlayerScrip ps = PlayerObject.GetComponent<PlayerScrip>();
+        PlayerScript ps = PlayerObject.GetComponent<PlayerScript>();
         if (ps)
         {
             GameObject plShip = ps.getShip();
             if (plShip)
             {
-                ship shipScript = plShip.GetComponent<ship>();
+                ShipScript shipScript = plShip.GetComponent<ShipScript>();
                 if (shipScript)
                 {
                     Slider speedBar = (Slider)GetComponent<Slider>();

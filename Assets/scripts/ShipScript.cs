@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class ship : NetworkBehaviour
+public class ShipScript : NetworkBehaviour
 {
     [SyncVar]
     public string name;
@@ -60,7 +60,7 @@ public class ship : NetworkBehaviour
             GameObject playerOverScene = GameObject.Find("PlayerOverScene");
             if (playerOverScene != null)
             {
-                PlayerScrip ps = playerOverScene.GetComponent<PlayerScrip>();
+                PlayerScript ps = playerOverScene.GetComponent<PlayerScript>();
                 if (ps != null)
                 {
                     ps.manageDeath();

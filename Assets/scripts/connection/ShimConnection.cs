@@ -8,14 +8,14 @@ using System.Collections.Generic;
 using System;
 
 [Serializable]
-public class login
+public class ShimLogin
 {
     public string code;
     public string status;
     public string id;
 }
 
-public class connection : MonoBehaviour {
+public class ShimConnection : MonoBehaviour {
     private NetworkClient client;
     public InputField loginField;
     public InputField passwordField;
@@ -62,14 +62,14 @@ public class connection : MonoBehaviour {
 
         /* if (!string.IsNullOrEmpty(www.text))
          {
-             var login = JsonUtility.FromJson<login>(www.text);
+             var login = JsonUtility.FromJson<ShimLogin>(www.text);
              if (login.status == "1")
              {
                  failed.gameObject.SetActive(false);
                  success.gameObject.SetActive(true);
                  connectBtn.gameObject.SetActive(false);
                  playBtn.gameObject.SetActive(true);
-                 PlayerScrip plScript = playerOverScene.GetComponent<PlayerScrip>();
+                 PlayerScript plScript = playerOverScene.GetComponent<PlayerScrip>();
                  plScript.setId(int.Parse(login.id));
                  plScript.setName(loginField.text);
 

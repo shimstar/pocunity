@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class shimNWManager : NetworkManager {
+public class ShimNWManager : NetworkManager {
 
     public void Start()
     {

@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class ghoulscript : ship {
+public class ghoulscript : ShipScript
+{
     private GameObject targetUI;
     
     public float force = 0.1f;

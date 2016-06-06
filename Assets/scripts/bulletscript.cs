@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class bulletscript : NetworkBehaviour
+public class BulletScript : NetworkBehaviour
 {
     private float timer;
     private float damage;
@@ -35,7 +35,7 @@ public class bulletscript : NetworkBehaviour
                 {
                     dfcontrol.setDamage(damage);
                 }*/
-                ship shipControl = collision.gameObject.GetComponent<ship>();
+                ShipScript shipControl = collision.gameObject.GetComponent<ShipScript>();
                 
                 if (shipControl != null)
                 {

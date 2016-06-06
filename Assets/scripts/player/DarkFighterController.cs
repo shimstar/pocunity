@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using System;
 
-public class dfcontroller : ship
+public class DarkFighterController : ShipScript
 {
     public GameObject greenLaserPrefab;
     public Texture2D crosshairImage;
@@ -24,8 +24,8 @@ public class dfcontroller : ship
 
             for (int itShip = 0; itShip < listOfShips.Length; itShip++)
             {
-                if (listOfShips[itShip] != this) { 
-                    ship shipScript = listOfShips[itShip].GetComponent<ship>();
+                if (listOfShips[itShip] != this) {
+                    ShipScript shipScript = listOfShips[itShip].GetComponent<ShipScript>();
                     if (shipScript != null)
                     {
                         if (shipScript.floatingNameText == null)
@@ -72,7 +72,7 @@ public class dfcontroller : ship
 
     private void showUiGame(Boolean show)
     {
-        GameObject speedBar = GameObject.Find("Canvas").transform.Find("speedbar").gameObject;
+        GameObject speedBar = GameObject.Find("Canvas").transform.Find("SpeedBar").gameObject;
         if (speedBar)
         {
             speedBar.SetActive(show);
@@ -82,12 +82,12 @@ public class dfcontroller : ship
         {
             healthBar.SetActive(show);
         }
-        GameObject deathPanelGO = GameObject.Find("Canvas").transform.Find("deathpanel").gameObject;
+        GameObject deathPanelGO = GameObject.Find("Canvas").transform.Find("DeathPanel").gameObject;
         if (deathPanelGO)
         {
             deathPanelGO.SetActive(!show);
         }
-        GameObject reticule = GameObject.Find("Canvas").transform.Find("reticule").gameObject;
+        GameObject reticule = GameObject.Find("Canvas").transform.Find("Reticule").gameObject;
         if (reticule)
         {
             reticule.SetActive(show);
@@ -103,7 +103,7 @@ public class dfcontroller : ship
         this.name = "PlayerShip";
         shipFromLocalPlayer = true;
         GameObject playerOverScene = GameObject.Find("PlayerOverScene");
-        PlayerScrip ps = playerOverScene.GetComponent<PlayerScrip>();
+        PlayerScript ps = playerOverScene.GetComponent<PlayerScript>();
         if (ps)
         {
             ps.setShip(this.gameObject);

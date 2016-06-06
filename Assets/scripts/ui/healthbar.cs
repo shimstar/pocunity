@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class healthbar : MonoBehaviour {
+public class HealthBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,14 +12,14 @@ public class healthbar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         GameObject PlayerObject = GameObject.Find("PlayerOverScene");
-        PlayerScrip ps = PlayerObject.GetComponent<PlayerScrip>();
+        PlayerScript ps = PlayerObject.GetComponent<PlayerScript>();
         if (ps)
         {
             GameObject plShip = ps.getShip();
             if (plShip != null)
             {
-                ship shipScript = plShip.GetComponent<ship>();
-               if (shipScript)
+                ShipScript shipScript = plShip.GetComponent<ShipScript>();
+                if (shipScript)
                 {
                     Slider healthBar = (Slider)GetComponent<Slider>();
                     healthBar.value = shipScript.getPrcentHull();

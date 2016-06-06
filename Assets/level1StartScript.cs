@@ -96,12 +96,6 @@ public class level1StartScript : NetworkBehaviour
 	void Start () {
            
             //generateLevel();
-            GameObject uiDeath = GameObject.Find("/Canvas/deathpanel");
-        
-            if (uiDeath != null)
-            {
-                uiDeath.SetActive(false);
-            }
 
 
     }
