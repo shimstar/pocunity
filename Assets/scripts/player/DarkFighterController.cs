@@ -109,6 +109,26 @@ public class DarkFighterController : ShipScript
         {
             reticule.SetActive(show);
         }
+
+        if (!show)
+        {
+            GameObject[] listOfShips = GameObject.FindGameObjectsWithTag("ship");
+            for (int itShip = 0; itShip < listOfShips.Length; itShip++)
+            {
+                if (listOfShips[itShip] != this)
+                {
+                    ShipScript shipScript = listOfShips[itShip].GetComponent<ShipScript>();
+                    if (shipScript != null)
+                    {
+                        if (shipScript.getFloatingNameText() != null)
+                        {
+                            shipScript.getFloatingNameText().SetActive(false);
+                            shipScript.getTargetUi().SetActive(false);
+                        }
+                     }
+                }
+            }
+        }
     }
 
     public override void OnStartLocalPlayer()
