@@ -131,12 +131,12 @@ public class DarkFighterController : ShipScript
 
     void OnCollisionEnter(Collision collision)
     {
-        if (isServer)
+       /* if (isServer)
         {
             hull -= 10;
             speed = 0;
             Debug.Log(collision.collider);
-        }
+        }*/
         
     }
 

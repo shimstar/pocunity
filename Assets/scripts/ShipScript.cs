@@ -24,6 +24,11 @@ public class ShipScript : NetworkBehaviour
         return hull;
     }
 
+    public void setSpeed(float pSpeed)
+    {
+        this.speed = pSpeed;
+    }
+
     public float getPrcentSpeed()
     {
         return speed / speedMax;
