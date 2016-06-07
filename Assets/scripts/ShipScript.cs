@@ -6,7 +6,8 @@ public class ShipScript : NetworkBehaviour
 {
     [SyncVar]
     public string name;
-    public GameObject floatingNameText = null;
+    private GameObject floatingNameText = null;
+    private GameObject targetUi = null;
     protected float torqueStep = 80;
     [SyncVar]
     protected float speed = 0;
@@ -18,6 +19,26 @@ public class ShipScript : NetworkBehaviour
     protected float hull;
     protected float maxHull = 100.0f;
     public Texture2D targetUITexture;
+
+    public GameObject getFloatingNameText()
+    {
+        return this.floatingNameText;
+    }
+
+    public void setFloatingNameText(GameObject flText)
+    {
+        this.floatingNameText = flText;
+    }
+
+    public GameObject getTargetUi()
+    {
+        return this.targetUi;
+    }
+
+    public void setTargetUi(GameObject tUI)
+    {
+        this.targetUi = tUI;
+    }
 
     public float getHull()
     {

@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour {
     private int id;
 
 
+
     public void setShip(GameObject ship)
     {
         this.ship = ship;

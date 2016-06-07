@@ -28,27 +28,37 @@ public class DarkFighterController : ShipScript
                     ShipScript shipScript = listOfShips[itShip].GetComponent<ShipScript>();
                     if (shipScript != null)
                     {
-                        if (shipScript.floatingNameText == null)
+                        if (shipScript.getFloatingNameText() == null)
                         {
                             GameObject floatingText = Resources.Load("ui/followingNameUIText") as GameObject;
-                            shipScript.floatingNameText = (GameObject)Instantiate(floatingText);
-                            shipScript.floatingNameText.transform.SetParent(canvas.transform);
-                            shipScript.floatingNameText.GetComponent<Text>().text = shipScript.name;
+                            GameObject targetUI = Resources.Load("ui/TargetImage") as GameObject;
+                            GameObject floatingTextInstance = Instantiate(floatingText) as GameObject;
+                            GameObject targetUIInstance = Instantiate(targetUI) as GameObject;
+                            shipScript.setFloatingNameText(floatingTextInstance);
+                            shipScript.setTargetUi(targetUIInstance);
+                            floatingTextInstance.transform.SetParent(canvas.transform);
+                            targetUIInstance.transform.SetParent(canvas.transform);
+                            floatingTextInstance.GetComponent<Text>().text = shipScript.name;
                         }
                         else
                         {
                             Camera camera = GetComponent<Camera>();
 
                             Vector3 screenPos = Camera.main.WorldToScreenPoint(listOfShips[itShip].transform.position);
+                            GameObject floatingNameText = shipScript.getFloatingNameText();
+                            GameObject targetUI = shipScript.getTargetUi();
                             if (screenPos.z > 0 && screenPos.y > 0 && screenPos.x > 0)
                             {
+                                targetUI.SetActive(true);
+                                targetUI.transform.position = screenPos;
                                 screenPos.x -= listOfShips[itShip].name.Length;
-                                shipScript.floatingNameText.SetActive(true);
-                                shipScript.floatingNameText.transform.position = screenPos;
+                                floatingNameText.SetActive(true);
+                                floatingNameText.transform.position = screenPos;
                             }
                             else
                             {
-                                shipScript.floatingNameText.SetActive(false);
+                                floatingNameText.SetActive(false);
+                                targetUI.SetActive(false);
                             }
                         }
                     }
@@ -230,7 +240,7 @@ public class DarkFighterController : ShipScript
         }
         else {
             rb.AddForce(rb.transform.forward * -speed, ForceMode.Acceleration);
-            this.setDamage(1);
+            //this.setDamage(1);
         }
         
         
