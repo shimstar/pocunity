@@ -24,6 +24,7 @@ public class ShimConnection : MonoBehaviour {
     public Text failed;
     public Text success;
     public GameObject playerOverScene;
+    public InputField IP;
        
 
     // Use this for initialization
@@ -69,7 +70,7 @@ public class ShimConnection : MonoBehaviour {
                  success.gameObject.SetActive(true);
                  connectBtn.gameObject.SetActive(false);
                  playBtn.gameObject.SetActive(true);
-                 PlayerScript plScript = playerOverScene.GetComponent<PlayerScrip>();
+                 PlayerScript plScript = playerOverScene.GetComponent<PlayerScript>();
                  plScript.setId(int.Parse(login.id));
                  plScript.setName(loginField.text);
 
@@ -85,6 +86,8 @@ public class ShimConnection : MonoBehaviour {
         success.gameObject.SetActive(true);
         connectBtn.gameObject.SetActive(false);
         playBtn.gameObject.SetActive(true);
+        PlayerScript plScript = playerOverScene.GetComponent<PlayerScript>();
+        plScript.setIpToGo(IP.text);
 
     }
 

@@ -23,6 +23,15 @@ public class ShimNetworkManager : NetworkManager {
             }
         }else
         {
+            GameObject ploverScene = GameObject.Find("PlayerOverScene");
+            if (ploverScene)
+            {
+                PlayerScript ps = ploverScene.GetComponent<PlayerScript>();
+                if (ps)
+                {
+                    this.networkAddress = ps.getIpToGo();
+                }
+            }
             this.StartClient();
         }
     }
@@ -60,6 +69,8 @@ public class ShimNetworkManager : NetworkManager {
 
     public override void OnClientConnect(NetworkConnection conn)
     {
+        
+
         base.OnClientConnect(conn);
         ClientScene.AddPlayer(0);
         GameObject pref = Resources.Load("ships/dark_fighter_631") as GameObject;

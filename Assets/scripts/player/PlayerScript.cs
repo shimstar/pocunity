@@ -6,7 +6,17 @@ public class PlayerScript : MonoBehaviour {
     public GameObject ship;
     private static GameObject currentPlayer;
     private int id;
+    private string ipToGo = "0.0.0.0";
 
+    public string getIpToGo()
+    {
+        return ipToGo;
+    }
+
+    public void setIpToGo(string ip)
+    {
+        ipToGo = ip;
+    }
 
 
     public void setShip(GameObject ship)
