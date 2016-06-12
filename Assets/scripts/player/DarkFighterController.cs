@@ -10,7 +10,19 @@ public class DarkFighterController : ShipScript
     public GameObject greenLaserPrefab;
     public Texture2D crosshairImage;
     
+    private float calcDistance(GameObject target)
+    {
+        float value = 0;
 
+        Vector3 posTarget = target.transform.position;
+        float dx = posTarget.x - transform.position.x;
+        float dy = posTarget.y - transform.position.y;
+        float dz = posTarget.z - transform.position.z;
+
+        value = (float) Math.Round(Math.Sqrt(dx*dx+dy*dy+dz*dz),2);
+
+        return value;
+    }
     void OnGUI()
     {
         if (isClient == true)
@@ -30,15 +42,22 @@ public class DarkFighterController : ShipScript
                     {
                         if (shipScript.getFloatingNameText() == null)
                         {
-                            GameObject floatingText = Resources.Load("ui/followingNameUIText") as GameObject;
+                            GameObject floatingText = Resources.Load("ui/PanelShip") as GameObject;
                             GameObject targetUI = Resources.Load("ui/TargetImage") as GameObject;
                             GameObject floatingTextInstance = Instantiate(floatingText) as GameObject;
                             GameObject targetUIInstance = Instantiate(targetUI) as GameObject;
+
                             shipScript.setFloatingNameText(floatingTextInstance);
                             shipScript.setTargetUi(targetUIInstance);
                             floatingTextInstance.transform.SetParent(canvas.transform);
-                            targetUIInstance.transform.SetParent(canvas.transform);
-                            floatingTextInstance.GetComponent<Text>().text = shipScript.name;
+                            PanelFollowingScript pf = floatingTextInstance.GetComponent<PanelFollowingScript>();
+                            if (pf)
+                            {
+                                pf.setShipToFollow(this.gameObject);
+                            }
+                            Debug.Log("pwet");
+                            //targetUIInstance.transform.SetParent(canvas.transform);
+                            //floatingTextInstance.GetComponent<Text>().text = shipScript.name;
                         }
                         else
                         {
@@ -52,8 +71,14 @@ public class DarkFighterController : ShipScript
                                 targetUI.SetActive(true);
                                 targetUI.transform.position = screenPos;
                                 screenPos.x -= listOfShips[itShip].name.Length;
+                                screenPos.y += 40;
                                 floatingNameText.SetActive(true);
                                 floatingNameText.transform.position = screenPos;
+                                GameObject distanceObj = floatingNameText.transform.Find("distance").gameObject;
+                                float distance = calcDistance(listOfShips[itShip]);
+                                Text distanceText = distanceObj.GetComponent<Text>();
+                                distanceText.text = distance.ToString();
+
                             }
                             else
                             {

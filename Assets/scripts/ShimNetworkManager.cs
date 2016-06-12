@@ -43,11 +43,11 @@ public class ShimNetworkManager : NetworkManager {
         base.OnStartServer();
         
         this.playerPrefab = Resources.Load("ships/dark_fighter_631") as GameObject;
-        GameObject pref = Resources.Load("ships/dark_fighter_631") as GameObject;
-        ClientScene.RegisterPrefab(pref);
-        pref = Resources.Load("ships/lasergreen") as GameObject;
-        ClientScene.RegisterPrefab(pref);
-        Debug.Log("onStartServer");
+        //GameObject pref = Resources.Load("ships/dark_fighter_631") as GameObject;
+        ClientScene.RegisterPrefab(this.playerPrefab);
+       // pref = Resources.Load("ships/lasergreen") as GameObject;
+        //ClientScene.RegisterPrefab(pref);
+        //Debug.Log("onStartServer");
         
     }
 
@@ -59,7 +59,7 @@ public class ShimNetworkManager : NetworkManager {
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        GameObject pref = Resources.Load("ships/dark_fighter_631") as GameObject;
+        //GameObject pref = Resources.Load("ships/dark_fighter_631") as GameObject;
         base.OnServerAddPlayer(conn, playerControllerId);
 
     }
