@@ -70,8 +70,8 @@ public class level1StartScript : NetworkBehaviour
     {
         GameObject pref = Resources.Load("ships/ghoul3") as GameObject;
         GameObject ennemy = (GameObject)Instantiate(pref);
-        ennemy.transform.position.Set(600, 600, 600);
-        ennemy.name = "test ennemy";
+        ennemy.transform.position= new Vector3(600, 600, 600);
+        ennemy.name = "Pirate";
         NetworkServer.Spawn(ennemy);
         loadLevel();
     }

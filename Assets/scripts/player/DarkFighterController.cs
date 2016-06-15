@@ -33,15 +33,15 @@ public class DarkFighterController : ShipScript
             */
             GameObject[] listOfShips = GameObject.FindGameObjectsWithTag("ship");
             GameObject canvas = GameObject.Find("Canvas");
-
             for (int itShip = 0; itShip < listOfShips.Length; itShip++)
             {
-                if (listOfShips[itShip] != this) {
+                if (listOfShips[itShip] != this.gameObject) {
                     ShipScript shipScript = listOfShips[itShip].GetComponent<ShipScript>();
                     if (shipScript != null)
                     {
                         if (shipScript.getFloatingNameText() == null)
                         {
+                           
                             GameObject floatingText = Resources.Load("ui/PanelShip") as GameObject;
                             GameObject targetUI = Resources.Load("ui/TargetImage") as GameObject;
                             GameObject floatingTextInstance = Instantiate(floatingText) as GameObject;
@@ -55,7 +55,7 @@ public class DarkFighterController : ShipScript
                             {
                                 pf.setShipToFollow(this.gameObject);
                             }
-                            Debug.Log("pwet");
+                                   
                             //targetUIInstance.transform.SetParent(canvas.transform);
                             //floatingTextInstance.GetComponent<Text>().text = shipScript.name;
                         }
@@ -180,7 +180,7 @@ public class DarkFighterController : ShipScript
         hull = maxHull;
         this.name = "playerShip";
         speedMax = 200;
-
+        this.setFaction(1);  
 
     }
 

@@ -4,8 +4,9 @@ using UnityEngine.Networking;
 
 public class ShipScript : NetworkBehaviour
 {
+    
     [SyncVar]
-    public string name;
+    private int faction;
     private GameObject floatingNameText = null;
     private GameObject targetUi = null;
     protected float torqueStep = 80;
@@ -23,6 +24,16 @@ public class ShipScript : NetworkBehaviour
     public GameObject getFloatingNameText()
     {
         return this.floatingNameText;
+    }
+
+    public int getFaction()
+    {
+        return this.faction;
+    }
+
+    public void setFaction(int faction)
+    {
+        this.faction = faction;
     }
 
     public void setFloatingNameText(GameObject flText)
@@ -72,6 +83,7 @@ public class ShipScript : NetworkBehaviour
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+        faction = 0;
 	}
 	
 	// Update is called once per frame

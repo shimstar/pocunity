@@ -2,21 +2,21 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class ghoulscript : ShipScript
+public class GhoulScript : ShipScript
 {
     private GameObject targetUI;
     
     public float force = 0.1f;
     private float torque = 1.0f;
     private int gopointNb = 0;
-    GameObject target = null;
+    private GameObject target = null;
     private float lastShootTicks = 0.0f;
     private ArrayList patrolPoints = new ArrayList();
-    
 
+ 
+    
     // Use this for initialization
     void Start () {
-        this.rb = GetComponent<Rigidbody>();
         speed = 30;
         torqueStep = 50;
         patrolPoints.Add(new Vector3(0, 2, 405));
