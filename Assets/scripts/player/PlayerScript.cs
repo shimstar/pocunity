@@ -8,6 +8,16 @@ public class PlayerScript : MonoBehaviour {
     private int id;
     private string ipToGo = "0.0.0.0";
 
+    public string getPlayerName()
+    {
+        return playerName;
+    }
+
+    public void setPlayerName(string playerName)
+    {
+        this.playerName = playerName;
+    }
+
     public string getIpToGo()
     {
         return ipToGo;

@@ -17,11 +17,15 @@ public class GhoulScript : ShipScript
     
     // Use this for initialization
     void Start () {
-        speed = 30;
-        torqueStep = 50;
-        patrolPoints.Add(new Vector3(0, 2, 405));
-        patrolPoints.Add(new Vector3(2100, 3, 1145));
-        patrolPoints.Add(new Vector3(750, 3, -330));
+        if (isServer) { 
+            speed = 30;
+            torqueStep = 50;
+            patrolPoints.Add(new Vector3(0, 2, 405));
+            patrolPoints.Add(new Vector3(2100, 3, 1145));
+            patrolPoints.Add(new Vector3(750, 3, -330));
+            playerName = "Pirate";
+            faction = 0;
+        }
     }
 	
     float moveTo(Vector3 posTarget)

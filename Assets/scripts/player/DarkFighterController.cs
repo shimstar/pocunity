@@ -41,23 +41,14 @@ public class DarkFighterController : ShipScript
                     {
                         if (shipScript.getFloatingNameText() == null)
                         {
-                           
                             GameObject floatingText = Resources.Load("ui/PanelShip") as GameObject;
                             GameObject targetUI = Resources.Load("ui/TargetImage") as GameObject;
                             GameObject floatingTextInstance = Instantiate(floatingText) as GameObject;
                             GameObject targetUIInstance = Instantiate(targetUI) as GameObject;
-
                             shipScript.setFloatingNameText(floatingTextInstance);
                             shipScript.setTargetUi(targetUIInstance);
                             floatingTextInstance.transform.SetParent(canvas.transform);
                             PanelFollowingScript pf = floatingTextInstance.GetComponent<PanelFollowingScript>();
-                            if (pf)
-                            {
-                                pf.setShipToFollow(this.gameObject);
-                            }
-                                   
-                            //targetUIInstance.transform.SetParent(canvas.transform);
-                            //floatingTextInstance.GetComponent<Text>().text = shipScript.name;
                         }
                         else
                         {
@@ -72,12 +63,16 @@ public class DarkFighterController : ShipScript
                                 targetUI.transform.position = screenPos;
                                 screenPos.x -= listOfShips[itShip].name.Length;
                                 screenPos.y += 40;
+                                float distance = calcDistance(listOfShips[itShip]);
                                 floatingNameText.SetActive(true);
                                 floatingNameText.transform.position = screenPos;
                                 GameObject distanceObj = floatingNameText.transform.Find("distance").gameObject;
-                                float distance = calcDistance(listOfShips[itShip]);
-                                Text distanceText = distanceObj.GetComponent<Text>();
-                                distanceText.text = distance.ToString();
+                                
+                                PanelFollowingScript pf = floatingNameText.GetComponent<PanelFollowingScript>();
+                                if (pf)
+                                {
+                                    pf.updateUi(shipScript.getPlayerName(), shipScript.getPrcentHull(), shipScript.getFaction(), distance);
+                                }
 
                             }
                             else
@@ -156,19 +151,26 @@ public class DarkFighterController : ShipScript
         }
     }
 
+    [Command]
+    private void CmdSetPlayerName(string plName)
+    {
+        this.setPlayerName(plName);
+    }
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         Camera camToPlayer = Camera.main;
         camToPlayer.transform.parent = this.transform;
         camToPlayer.transform.position = new Vector3(0, 0, -1);
-        this.name = "PlayerShip";
+        //this.name = "PlayerShip";
         shipFromLocalPlayer = true;
         GameObject playerOverScene = GameObject.Find("PlayerOverScene");
         PlayerScript ps = playerOverScene.GetComponent<PlayerScript>();
         if (ps)
         {
             ps.setShip(this.gameObject);
+            this.CmdSetPlayerName(ps.getPlayerName());
         }
         showUiGame(true);
 

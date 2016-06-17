@@ -6,9 +6,11 @@ public class ShipScript : NetworkBehaviour
 {
     
     [SyncVar]
-    private int faction;
-    private GameObject floatingNameText = null;
-    private GameObject targetUi = null;
+    protected int faction;
+    [SyncVar]
+    protected string playerName;
+    protected GameObject floatingNameText = null;
+    protected GameObject targetUi = null;
     protected float torqueStep = 80;
     [SyncVar]
     protected float speed = 0;
@@ -24,6 +26,16 @@ public class ShipScript : NetworkBehaviour
     public GameObject getFloatingNameText()
     {
         return this.floatingNameText;
+    }
+
+    public void setPlayerName(string name)
+    {
+        this.playerName = name;
+    }
+
+    public string getPlayerName()
+    {
+        return this.playerName;
     }
 
     public int getFaction()
@@ -82,8 +94,12 @@ public class ShipScript : NetworkBehaviour
     }
     // Use this for initialization
     void Start () {
-        rb = GetComponent<Rigidbody>();
-        faction = 0;
+        if (isServer)
+        {
+            rb = GetComponent<Rigidbody>();
+            faction = 0;
+            this.playerName = "TOTO";
+        }
 	}
 	
 	// Update is called once per frame

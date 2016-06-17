@@ -3,23 +3,36 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PanelFollowingScript : MonoBehaviour {
-    private GameObject shipToFollow;
-
-    public void setShipToFollow(GameObject ship)
-    {
-        //Debug.Log("aroira");
-        this.shipToFollow = ship;
-    }
+    Text nameText;
+    Text distanceText;
+    Slider hullSlider;
 
 	// Use this for initialization
 	void Start () {
-        //Debug.Log("start PanelFoolowingScript");
-        Image img = this.gameObject.GetComponent<Image>();
-        //Debug.Log(img.color);
-        //img.color = new Color(112,51,136);
-        img.color = Color.red;
-        //Debug.Log(img.color);
-        //Debug.Log(this.gameObject.activeSelf);
+        nameText = this.transform.Find("name").gameObject.GetComponent<Text>();
+        hullSlider = this.transform.Find("life").gameObject.GetComponent<Slider>();
+        distanceText = this.transform.Find("distance").gameObject.GetComponent<Text>();
+    }
+
+    public void updateUi(string name, float prcentHull, int faction, float distance)
+    {
+        if(nameText == null)
+        {
+            nameText = this.transform.Find("name").gameObject.GetComponent<Text>();
+            hullSlider = this.transform.Find("life").gameObject.GetComponent<Slider>();
+            distanceText = this.transform.Find("distance").gameObject.GetComponent<Text>();
+        }
+        
+        nameText.text = name;
+        if (faction == 0)
+        {
+            nameText.color = Color.red;
+        }
+        
+        hullSlider.value = prcentHull;
+
+        distanceText.text = distance.ToString();
+        
     }
 	
 	// Update is called once per frame
